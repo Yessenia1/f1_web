@@ -1,0 +1,234 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F1 Web | Inicio</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Configuración personalizada de Tailwind */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .hero-background {
+            /* URL de imagen de coche F1 de alta energía para simular el hero */
+            background-image: url('https://www.f1-fansite.com/wp-content/uploads/2023/10/Rd_18_Qatar_Grand_Prix_Preview.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: scroll;
+        }
+
+        .stat-glow {
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+        }
+
+        /* Estilo para el hover de los enlaces de la navbar */
+        .nav-link:hover {
+            color: #f87171; /* red-400 */
+            transition: color 0.3s ease;
+        }
+
+        /* Estilo para simular el efecto de la banda de rodadura de los neumáticos en el footer */
+        .tech-bg {
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.9)), url('https://as01.epimg.net/motor/imagenes/2022/03/08/reportajes/1646752972_804785_1646931151_noticiareportajes_grande.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-900 text-white">
+
+    
+
+    <!-- Contenido Principal - Máximo 6xl para un diseño más amplio -->
+    <main class="mx-auto mt-0">
+        <!-- Hero Section: Próxima Carrera -->
+        <div class="hero-background h-[60vh] md:h-[70vh] flex items-center justify-center relative rounded-b-xl overflow-hidden">
+            <!-- Overlay oscuro para mejorar la legibilidad del texto -->
+            <div class="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center p-4">
+                <p class="text-md md:text-xl text-red-400 font-semibold uppercase tracking-widest mb-2">
+                    La Velocidad No Espera
+                </p>
+                <h1 class="text-4xl md:text-7xl font-black text-white text-center leading-tight mb-8">
+                    GRAN PREMIO DE QATAR
+                    <span class="block text-red-600 mt-2">30 NOVIEMBRE</span>
+                </h1>
+                <a href="#preview" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-lg uppercase tracking-wider transition duration-300 transform hover:scale-[1.02] shadow-xl stat-glow">
+                    ¡VER PREVIA!
+                </a>
+            </div>
+        </div>
+        
+        <!-- Contenido principal y Estadísticas -->
+        <div class="max-w-6xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            
+            <!-- Bloque 1: Feed y Cuenta Regresiva -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+                
+                <!-- Columna 1/2: Última Hora (Feed de Noticias) -->
+                <div class="lg:col-span-2">
+                    <h2 class="text-2xl font-bold text-red-600 mb-6 uppercase border-b border-gray-700 pb-2">Última Hora</h2>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <!-- Noticia 1 -->
+                        <div class="bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-300">
+                            <img src="https://cdn-5.motorsport.com/images/amp/Y99DgD8Y/s1000/mclaren-mcl38-front-wing-endpl.jpg" alt="Noticia McLaren" class="w-full h-32 object-cover">
+                            <div class="p-4">
+                                <p class="text-sm text-gray-400 mb-1">Tecnología F1</p>
+                                <a href="#" class="text-lg font-semibold hover:text-red-600 transition">McLaren revoluciona el ala delantera.</a>
+                            </div>
+                        </div>
+                        <!-- Noticia 2 -->
+                        <div class="bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-300">
+                            <img src="https://cdn-6.motorsport.com/images/amp/2jX45bz6/s1000/charles-leclerc-ferrari.jpg" alt="Noticia Ferrari" class="w-full h-32 object-cover">
+                            <div class="p-4">
+                                <p class="text-sm text-gray-400 mb-1">Escuderías</p>
+                                <a href="#" class="text-lg font-semibold hover:text-red-600 transition">Ferrari busca optimizar el tiempo en boxes.</a>
+                            </div>
+                        </div>
+                        <!-- Noticia 3 -->
+                        <div class="bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-300">
+                            <img src="https://currentaffairs.adda247.com/wp-content/uploads/multisite/sites/5/2025/11/24073153/Max-Verstappen-wins-the-2025-Las-Vegas-Grand-Prix.webp" alt="Noticia Verstappen" class="w-full h-32 object-cover">
+                            <div class="p-4">
+                                <p class="text-sm text-gray-400 mb-1">Pilotos</p>
+                                <a href="#" class="text-lg font-semibold hover:text-red-600 transition">Verstappen: 'Estoy en mi mejor momento'.</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Columna 3: Cuenta Regresiva y Mapa -->
+                <div class="bg-gray-800 p-6 rounded-xl shadow-2xl border-t-4 border-red-600 stat-glow">
+                    <div class="text-center mb-6">
+                        <p class="text-sm uppercase tracking-widest text-red-400">Inicio de Carrera en</p>
+                        <div class="text-5xl font-extrabold text-red-600 mt-1" id="countdown">
+                            03:15:28:10
+                        </div>
+                        <div class="flex justify-around text-xs mt-2 uppercase text-gray-400 font-semibold">
+                            <span>DÍAS</span>
+                            <span>HORAS</span>
+                            <span>MIN</span>
+                            <span>SEG</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Mapa/Miniatura del Circuito -->
+                    <div class="bg-gray-900 h-40 w-full rounded-lg flex items-center justify-center mb-4">
+                        <img src="https://cdn.ferrari.com/cms/network/media/img/resize/615736f6b4ae216a3a771188?width=1480&height=840" alt="Mapa del Circuito" class="max-h-full max-w-full rounded-lg opacity-80">
+                    </div>
+                    
+                    <!-- Navegación de Circuitos -->
+                    <div class="flex flex-wrap justify-center gap-2">
+                        <span class="bg-red-600 text-white text-xs font-semibold px-3 py-1 rounded-full cursor-pointer">MEXICO</span>
+                        <span class="bg-gray-700 hover:bg-red-600 text-gray-300 text-xs font-semibold px-3 py-1 rounded-full cursor-pointer">LAS VEGAS</span>
+                        <span class="bg-gray-700 hover:bg-red-600 text-gray-300 text-xs font-semibold px-3 py-1 rounded-full cursor-pointer">ABU DHABI</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bloque 2: Clasificaciones -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                
+                <!-- Clasificación Pilotos -->
+                <div class="bg-gray-800 p-6 rounded-xl shadow-xl border-l-4 border-red-600">
+                    <h2 class="text-xl font-bold mb-4 uppercase text-red-600">Clasificación Pilotos</h2>
+                    <ul class="space-y-2">
+                        <li class="flex justify-between border-b border-gray-700 pb-1">
+                            <span class="font-bold">1. NORRIS</span>
+                            <span class="text-red-400">390 PTS</span>
+                        </li>
+                        <li class="flex justify-between border-b border-gray-700 pb-1">
+                            <span class="font-semibold">2. OSCAR PIASTRI</span>
+                            <span class="text-gray-300">366 PTS</span>
+                        </li>
+                        <li class="flex justify-between border-b border-gray-700 pb-1">
+                            <span class="font-semibold">3. VERSTAPPEN</span>
+                            <span class="text-gray-300">366 PTS</span>
+                        </li>
+                    </ul>
+                    <a href="/pilotos" class="block mt-4 text-sm text-red-500 hover:text-red-400 font-semibold">Ver clasificación completa →</a>
+                </div>
+
+                <!-- Clasificación Constructores -->
+                <div class="bg-gray-800 p-6 rounded-xl shadow-xl border-l-4 border-red-600">
+                    <h2 class="text-xl font-bold mb-4 uppercase text-red-600">Clasificación Constructores</h2>
+                    <ul class="space-y-2">
+                        <li class="flex justify-between border-b border-gray-700 pb-1">
+                            <span class="font-bold">1. RED BULL RT</span>
+                            <span class="text-red-400">315 PTS</span>
+                        </li>
+                        <li class="flex justify-between border-b border-gray-700 pb-1">
+                            <span class="font-semibold">2. FERRARI</span>
+                            <span class="text-gray-300">230 PTS</span>
+                        </li>
+                        <li class="flex justify-between border-b border-gray-700 pb-1">
+                            <span class="font-semibold">3. MERCEDES</span>
+                            <span class="text-gray-300">175 PTS</span>
+                        </li>
+                    </ul>
+                    <a href="/escuderias" class="block mt-4 text-sm text-red-500 hover:text-red-400 font-semibold">Ver clasificación completa →</a>
+                </div>
+                
+                <!-- Fan Zone / El Piloto del Momento -->
+                <div class="bg-red-600 text-white p-6 rounded-xl shadow-2xl flex flex-col justify-between">
+                    <div>
+                        <h2 class="text-xl font-bold mb-2 uppercase">Fan Zone</h2>
+                        <p class="text-3xl font-extrabold leading-tight mb-4">
+                            ¿Quién Ganará en España?
+                        </p>
+                        <div class="bg-red-700 p-3 rounded-lg flex justify-between items-center mb-3 cursor-pointer hover:bg-red-800 transition">
+                            <span class="font-semibold">MAX VERSTAPPEN</span>
+                            <span class="text-xs bg-white text-red-800 px-2 py-1 rounded-full font-bold">48%</span>
+                        </div>
+                        <div class="bg-red-700 p-3 rounded-lg flex justify-between items-center cursor-pointer hover:bg-red-800 transition">
+                            <span class="font-semibold">LANDO NORRIS</span>
+                            <span class="text-xs bg-white text-red-800 px-2 py-1 rounded-full font-bold">25%</span>
+                        </div>
+                    </div>
+                    <p class="mt-4 text-sm text-red-200">¡Participa en la encuesta!</p>
+                </div>
+
+            </div>
+
+            <!-- Bloque 3: Tecnología (Sección Detrás del Coche) -->
+            <div class="tech-bg py-16 px-8 rounded-xl shadow-inner border border-red-900">
+                <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 mb-6 md:mb-0">
+                        <img src="https://tecnicaf1.wordpress.com/wp-content/uploads/2011/12/img_01.jpg" alt="Detalle de ingeniería" class="rounded-xl shadow-2xl opacity-90 transform hover:scale-[1.03] transition duration-500">
+                    </div>
+                    <div class="md:w-1/2 md:pl-10">
+                        <p class="text-red-600 text-sm font-semibold uppercase tracking-widest mb-2">Ingeniería F1</p>
+                        <h2 class="text-3xl font-bold text-white mb-4">
+                            DETRÁS DEL COCHE:
+                            <span class="block text-red-400">¿Cómo Funciona la Aerodinámica?</span>
+                        </h2>
+                        <p class="text-gray-400 mb-6">
+                            Sumérgete en el mundo de la alta tecnología. Exploramos los complejos diseños de alerones y el efecto suelo que definen la velocidad actual.
+                        </p>
+                        <a href="/tecnologia" class="text-red-500 hover:text-red-400 font-semibold flex items-center">
+                            Leer análisis completo 
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div> <!-- Fin de max-w-6xl -->
+
+    </main>
+
+   
+
+</body>
+
+</html>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h1 class="text-3xl font-bold text-red-600 mb-6">Login Admin</h1>
+
+<form method="POST" class="bg-white p-6 rounded-xl shadow max-w-xl">
+
+    <label class="block mb-2 font-semibold">Usuario</label>
+    <input type="text" name="username" class="w-full p-2 border rounded mb-4">
+
+    <label class="block mb-2 font-semibold">Contraseña</label>
+    <input type="password" name="password" class="w-full p-2 border rounded mb-4">
+
+    <button class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">
+        Entrar
+    </button>
+
+</form>
+
+{% endblock %}

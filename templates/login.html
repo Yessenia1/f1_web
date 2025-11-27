@@ -1,0 +1,113 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    
+    <div class="max-w-md w-full">
+        
+        <!-- Header del login -->
+        <div class="text-center mb-8">
+            <div class="inline-block bg-red-600 p-4 rounded-full mb-4">
+                <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                </svg>
+            </div>
+            <h1 class="text-4xl font-black text-white uppercase mb-2">
+                ACCESO <span class="text-red-600">ADMIN</span>
+            </h1>
+            <p class="text-gray-400">Panel de administración F1 Web</p>
+        </div>
+
+        <!-- Formulario -->
+        <div class="bg-gray-800 rounded-2xl shadow-2xl p-8 border-t-4 border-red-600">
+            
+            <form method="POST" class="space-y-6">
+                
+                <!-- Campo Usuario -->
+                <div>
+                    <label class="block text-sm font-semibold text-gray-400 uppercase tracking-wider mb-2">
+                        Usuario
+                    </label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                            </svg>
+                        </div>
+                        <input 
+                            type="text" 
+                            name="username" 
+                            class="w-full pl-10 pr-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600/50 transition"
+                            placeholder="Ingresa tu usuario"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <!-- Campo Contraseña -->
+                <div>
+                    <label class="block text-sm font-semibold text-gray-400 uppercase tracking-wider mb-2">
+                        Contraseña
+                    </label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                            </svg>
+                        </div>
+                        <input 
+                            type="password" 
+                            name="password" 
+                            class="w-full pl-10 pr-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600/50 transition"
+                            placeholder="Ingresa tu contraseña"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <!-- Recordar sesión (opcional) -->
+                <div class="flex items-center justify-between">
+                    <label class="flex items-center cursor-pointer">
+                        <input type="checkbox" class="w-4 h-4 bg-gray-900 border-gray-700 rounded text-red-600 focus:ring-red-600">
+                        <span class="ml-2 text-sm text-gray-400">Recordarme</span>
+                    </label>
+                    <a href="#" class="text-sm text-red-500 hover:text-red-400 font-semibold">
+                        ¿Olvidaste tu contraseña?
+                    </a>
+                </div>
+
+                <!-- Botón de login -->
+                <button 
+                    type="submit" 
+                    class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-lg uppercase tracking-wider transition duration-300 transform hover:scale-[1.02] shadow-xl stat-glow flex items-center justify-center gap-2"
+                >
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path>
+                    </svg>
+                    Iniciar Sesión
+                </button>
+
+            </form>
+
+            <!-- Divider -->
+            <div class="mt-6 pt-6 border-t border-gray-700">
+                <p class="text-center text-sm text-gray-400">
+                    ¿No tienes acceso? 
+                    <a href="/" class="text-red-500 hover:text-red-400 font-semibold">Contacta al administrador</a>
+                </p>
+            </div>
+
+        </div>
+
+        <!-- Información adicional -->
+        <div class="mt-6 text-center">
+            <p class="text-xs text-gray-500">
+                🔒 Acceso restringido solo para personal autorizado
+            </p>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

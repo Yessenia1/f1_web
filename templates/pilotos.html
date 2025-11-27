@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="max-w-6xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+    
+    <!-- Header con estilo F1 -->
+    <div class="mb-10">
+        <p class="text-red-400 text-sm font-semibold uppercase tracking-widest mb-2">Temporada 2025</p>
+        <h1 class="text-4xl md:text-6xl font-black text-white mb-4">
+            PILOTOS DE <span class="text-red-600">FÓRMULA 1</span>
+        </h1>
+        <div class="h-1 w-32 bg-red-600"></div>
+    </div>
+
+    <!-- Grid de pilotos -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        {% for p in pilotos %}
+        <div class="bg-gray-800 rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition duration-300 transform hover:scale-[1.02] border-t-4 border-red-600">
+            
+            <!-- Imagen del piloto -->
+            <div class="bg-gray-900 h-48 flex items-center justify-center overflow-hidden">
+                <img src="{{ p['imagen'] if p['imagen'] else 'https://via.placeholder.com/300x300?text=F1' }}" 
+                     alt="{{ p['nombre'] }}" 
+                     class="w-full h-full object-cover opacity-90 hover:opacity-100 transition">
+            </div>
+
+            <!-- Información del piloto -->
+            <div class="p-5">
+                <div class="flex justify-between items-start mb-3">
+                    <h2 class="text-2xl font-bold text-white uppercase">{{ p['nombre'] }}</h2>
+                    <span class="bg-red-600 text-white text-lg font-black px-3 py-1 rounded">#{{ p['numero'] }}</span>
+                </div>
+
+                <div class="space-y-2 mb-4">
+                    <p class="text-gray-400 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                        </svg>
+                        <span class="font-semibold text-white">{{ p['equipo'] }}</span>
+                    </p>
+                    <p class="text-gray-400 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <span>{{ p['pais'] }}</span>
+                    </p>
+                </div>
+
+                <a href="/piloto/{{ p['id'] }}" class="block text-center bg-red-600 hover:bg-red-700 text-white font-semibold py-2 rounded-lg transition uppercase text-sm tracking-wider">
+                    Ver Perfil
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+
+    <!-- Si no hay pilotos -->
+    {% if pilotos|length == 0 %}
+    <div class="bg-gray-800 p-10 rounded-xl text-center">
+        <svg class="w-20 h-20 mx-auto text-gray-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        <p class="text-gray-400 text-lg">No hay pilotos registrados aún.</p>
+        <a href="/admin" class="inline-block mt-4 text-red-500 hover:text-red-400 font-semibold">Agregar piloto →</a>
+    </div>
+    {% endif %}
+
+</div>
+
+{% endblock %}

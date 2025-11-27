@@ -1,0 +1,104 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="max-w-6xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+    
+    <!-- Header con estilo F1 -->
+    <div class="mb-10">
+        <p class="text-red-400 text-sm font-semibold uppercase tracking-widest mb-2">Calendario Oficial</p>
+        <h1 class="text-4xl md:text-6xl font-black text-white mb-4">
+            CARRERAS <span class="text-red-600">TEMPORADA 2025</span>
+        </h1>
+        <div class="h-1 w-32 bg-red-600"></div>
+    </div>
+
+    <!-- Timeline de carreras -->
+    <div class="space-y-4">
+
+        {% for c in carreras %}
+        <div class="bg-gray-800 rounded-xl shadow-xl hover:shadow-2xl transition duration-300 overflow-hidden border-l-4 border-red-600 group">
+            
+            <div class="p-6 flex flex-col md:flex-row md:items-center gap-6">
+                
+                <!-- Número de carrera (Round) -->
+                <div class="flex-shrink-0 bg-red-600 text-white w-20 h-20 rounded-lg flex items-center justify-center">
+                    <div class="text-center">
+                        <p class="text-xs uppercase font-semibold">Round</p>
+                        <p class="text-2xl font-black">{{ loop.index }}</p>
+                    </div>
+                </div>
+
+                <!-- Información principal -->
+                <div class="flex-grow">
+                    <h2 class="text-2xl md:text-3xl font-black text-white uppercase mb-2 group-hover:text-red-600 transition">
+                        {{ c['nombre'] }}
+                    </h2>
+                    
+                    <div class="flex flex-wrap gap-4 text-gray-400">
+                        <!-- País -->
+                        <div class="flex items-center gap-2">
+                            <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            <span class="font-semibold">{{ c['pais'] }}</span>
+                        </div>
+
+                        <!-- Fecha -->
+                        <div class="flex items-center gap-2">
+                            <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                            <span class="font-semibold">{{ c['fecha'] }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Acciones -->
+                <div class="flex-shrink-0 flex flex-col gap-2">
+                    <button class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-6 rounded-lg transition uppercase text-sm tracking-wider">
+                        Ver Detalles
+                    </button>
+                    <button class="bg-gray-700 hover:bg-gray-600 text-white font-semibold py-2 px-6 rounded-lg transition uppercase text-sm tracking-wider">
+                        Resultados
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- Barra de progreso (decorativa) -->
+            
+        </div>
+        {% endfor %}
+
+    </div>
+
+    <!-- Si no hay carreras -->
+    {% if carreras|length == 0 %}
+    <div class="bg-gray-800 p-10 rounded-xl text-center">
+        <svg class="w-20 h-20 mx-auto text-gray-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+        </svg>
+        <p class="text-gray-400 text-lg">No hay carreras programadas aún.</p>
+    </div>
+    {% endif %}
+
+    <!-- Estadísticas de la temporada -->
+    <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-gray-800 p-6 rounded-xl text-center border-t-4 border-red-600">
+            <p class="text-gray-400 text-sm uppercase tracking-wider mb-2">Total Carreras</p>
+            <p class="text-4xl font-black text-white">{{ carreras|length }}</p>
+        </div>
+        <div class="bg-gray-800 p-6 rounded-xl text-center border-t-4 border-red-600">
+            <p class="text-gray-400 text-sm uppercase tracking-wider mb-2">Países Visitados</p>
+            <p class="text-4xl font-black text-white">{{ carreras|length }}</p>
+        </div>
+        <div class="bg-gray-800 p-6 rounded-xl text-center border-t-4 border-red-600">
+            <p class="text-gray-400 text-sm uppercase tracking-wider mb-2">Kilómetros Totales</p>
+            <p class="text-4xl font-black text-white">{{ (carreras|length * 305)|round|int }}</p>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

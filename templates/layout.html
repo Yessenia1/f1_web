@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title if title else "F1 Web" }}</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        /* Configuración personalizada de Tailwind */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .hero-background {
+            background-image: url('https://www.f1-fansite.com/wp-content/uploads/2023/10/Rd_18_Qatar_Grand_Prix_Preview.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: scroll;
+        }
+
+        .stat-glow {
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+        }
+
+        /* Estilo para el hover de los enlaces de la navbar */
+        .nav-link:hover {
+            color: #f87171; /* red-400 */
+            transition: color 0.3s ease;
+        }
+
+        /* Estilo para simular el efecto de la banda de rodadura de los neumáticos en el footer */
+        .tech-bg {
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.9)), url('https://as01.epimg.net/motor/imagenes/2022/03/08/reportajes/1646752972_804785_1646931151_noticiareportajes_grande.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-900 text-white">
+
+    <!-- Navbar - Oscura y Elegante -->
+    <nav class="bg-black text-white p-4 shadow-xl sticky top-0 z-10 border-b border-red-600/50">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <!-- Logo/Marca con acento rojo -->
+            <a href="/" class="text-2xl font-extrabold text-red-600 tracking-wider">F1 WEB</a>
+
+            <!-- Enlaces de navegación -->
+            <div class="space-x-6 text-sm font-medium hidden md:flex">
+                <a href="/" class="nav-link text-red-600">INICIO</a>
+                <a href="/pilotos" class="nav-link">PILOTOS</a>
+                <a href="/escuderias" class="nav-link">ESCUDERÍAS</a>
+                <a href="/carreras" class="nav-link">CALENDARIO</a>
+                <a href="/admin" class="nav-link">ADMIN</a>
+            </div>
+
+            <!-- Iconos de utilidad (simulados) -->
+            <div class="flex space-x-4">
+                <!-- Iconos de búsqueda y usuario -->
+                <svg class="w-6 h-6 hover:text-red-600 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                <svg class="w-6 h-6 hover:text-red-600 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <main class="mx-auto mt-0">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer - Oscuro y Minimalista -->
+    <footer class="text-center py-6 mt-12 bg-black text-gray-500 border-t border-gray-800">
+        <div class="max-w-6xl mx-auto px-4">
+            <p class="text-sm">
+                © 2025 F1 WEB. Todos los derechos reservados. Proyecto en Flask.
+            </p>
+            <div class="mt-2 text-xs space-x-4">
+                <a href="#" class="hover:text-red-600">Aviso Legal</a>
+                <span class="text-gray-700">|</span>
+                <a href="#" class="hover:text-red-600">Política de Privacidad</a>
+                <span class="text-gray-700">|</span>
+                <a href="#" class="hover:text-red-600">Contacto</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h1 class="text-3xl font-bold text-red-600 mb-6">{{ p['nombre'] }}</h1>
+
+<div class="bg-white p-6 rounded-xl shadow max-w-xl flex gap-5">
+
+    <img src="{{ p['imagen'] }}" class="rounded-lg shadow w-32 h-32 object-cover">
+
+    <div>
+        <p class="mb-2"><span class="font-semibold">Equipo:</span> {{ p['equipo'] }}</p>
+        <p class="mb-2"><span class="font-semibold">Número:</span> {{ p['numero'] }}</p>
+        <p class="mb-2"><span class="font-semibold">País:</span> {{ p['pais'] }}</p>
+
+        <a href="/pilotos" class="text-red-600 font-semibold hover:underline mt-4 inline-block">
+            ← Volver a Pilotos
+        </a>
+    </div>
+</div>
+
+{% endblock %}
