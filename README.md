@@ -25,7 +25,7 @@ Antes de comenzar, asegúrate de tener instalado:
 
 ```bash
 git clone https://github.com/tu-usuario/f1-web.git
-cd f1-web
+cd f1_web
 ```
 
 ### 2. Crea un entorno virtual (recomendado)
