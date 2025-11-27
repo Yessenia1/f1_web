@@ -1,18 +1,19 @@
 from flask import Flask, render_template, request, redirect, session
 import mysql.connector
+import os
 
 app = Flask(__name__)
-app.secret_key = "supersecret"
+app.secret_key = os.getenv("SECRET_KEY", "supersecret")
 
 # ===========================
 #   CONEXIÓN A MYSQL
 # ===========================
 def get_db():
     return mysql.connector.connect(
-        host="f1_mysql",      # nombre del servicio en docker-compose
-        user="root",
-        password="rootpass",
-        database="f1db"
+        host=os.getenv("DB_HOST", "f1_mysql"),
+        user=os.getenv("DB_USER", "root"),
+        password=os.getenv("DB_PASS", "rootpass"),
+        database=os.getenv("DB_NAME", "f1db")
     )
 
 # ===========================
@@ -47,6 +48,7 @@ def login():
             return "Usuario o contraseña incorrectos"
 
     return render_template("login.html")
+
 
 @app.route("/logout")
 def logout():
@@ -122,6 +124,7 @@ def carreras():
     cursor.execute("SELECT * FROM carreras")
     data = cursor.fetchall()
     return render_template("carreras.html", carreras=data)
+
 
 # ===========================
 #   MAIN
