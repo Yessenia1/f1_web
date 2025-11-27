@@ -1,0 +1,147 @@
+
+1️⃣ Preparar la instancia EC2
+
+Asumo que tu EC2 corre Ubuntu 22.04 o 20.04.
+
+# Actualizar paquetes
+sudo apt update && sudo apt upgrade -y
+
+# Instalar Apache
+sudo apt install apache2 -y
+
+# Instalar Nginx
+sudo apt install nginx -y
+
+# Instalar PHP y extensiones necesarias
+sudo apt install php php-mysql php-curl php-gd php-mbstring php-xml php-xmlrpc php-soap php-intl php-zip unzip -y
+
+# Reiniciar Apache y Nginx
+sudo systemctl restart apache2
+sudo systemctl restart nginx
+
+# Asegurar que ambos se inicien al boot
+sudo systemctl enable apache2
+sudo systemctl enable nginx
+
+
+---
+
+2️⃣ Configurar Nginx como reverse proxy para Apache
+
+Queremos que Nginx reciba las solicitudes y las pase a Apache (que correrá WordPress).
+
+Crea un archivo de configuración en Nginx:
+
+sudo nano /etc/nginx/sites-available/wordpress
+
+Pega esto (ajusta your_domain.com si tienes dominio):
+
+server {
+    listen 80;
+    server_name your_domain.com;
+
+    location / {
+        proxy_pass http://127.0.0.1:8080;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+
+Ahora habilita y reinicia Nginx:
+
+sudo ln -s /etc/nginx/sites-available/wordpress /etc/nginx/sites-enabled/
+sudo nginx -t
+sudo systemctl restart nginx
+
+
+---
+
+3️⃣ Configurar Apache para escuchar en puerto 8080
+
+Edita el puerto de escucha de Apache:
+
+sudo nano /etc/apache2/ports.conf
+
+Cambia:
+
+Listen 80
+
+Por:
+
+Listen 8080
+
+Luego, en el virtual host de WordPress:
+
+sudo nano /etc/apache2/sites-available/000-default.conf
+
+Asegúrate que tenga:
+
+<VirtualHost *:8080>
+    DocumentRoot /var/www/html
+    <Directory /var/www/html>
+        AllowOverride All
+    </Directory>
+</VirtualHost>
+
+Activa mod_rewrite y reinicia Apache:
+
+sudo a2enmod rewrite
+sudo systemctl restart apache2
+
+
+---
+
+4️⃣ Descargar e instalar WordPress
+
+cd /tmp
+wget https://wordpress.org/latest.zip
+unzip latest.zip
+sudo mv wordpress/* /var/www/html/
+sudo chown -R www-data:www-data /var/www/html/
+sudo chmod -R 755 /var/www/html/
+
+
+---
+
+5️⃣ Configurar WordPress para usar MySQL en RDS
+
+Edita el archivo wp-config.php:
+
+cd /var/www/html
+sudo cp wp-config-sample.php wp-config.php
+sudo nano wp-config.php
+
+Ajusta estas líneas con los datos de tu RDS:
+
+define('DB_NAME', 'nombre_de_tu_bd');
+define('DB_USER', 'tu_usuario_rds');
+define('DB_PASSWORD', 'tu_contraseña_rds');
+define('DB_HOST', 'endpoint_de_tu_rds:3306');  // ejemplo: mydb.abcdefg123.us-east-1.rds.amazonaws.com:3306
+define('DB_CHARSET', 'utf8');
+define('DB_COLLATE', '');
+
+
+---
+
+6️⃣ Configurar seguridad
+
+1. Asegúrate de que el grupo de seguridad de RDS permita conexiones desde tu EC2 (por IP o security group).
+
+
+2. En tu EC2, permite HTTP y HTTPS:
+
+
+
+sudo ufw allow 'Nginx Full'
+sudo ufw enable
+
+
+---
+
+7️⃣ Comprobar que todo funciona
+
+Entra al navegador: http://your_domain.com
+
+Debes ver la instalación de WordPress pidiéndote crear usuario y contraseña.
